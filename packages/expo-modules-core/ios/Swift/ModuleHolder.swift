@@ -101,7 +101,9 @@ public final class ModuleHolder {
     guard let runtime = appContext?.runtime else {
       return nil
     }
-    return definition.build(inRuntime: runtime)
+    let javaScriptObject = definition.build(inRuntime: runtime)
+    module.javaScriptObject = javaScriptObject
+    return javaScriptObject
   }
 
   // MARK: Listening to native events

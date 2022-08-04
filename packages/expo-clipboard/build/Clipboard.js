@@ -171,6 +171,10 @@ export async function hasImageAsync() {
  * ```
  */
 export function addClipboardListener(listener) {
+    if (global.ExpoModules?.ExpoClipboard) {
+        console.log('registered clipboard listener');
+        return ExpoClipboard.addListener(onClipboardEventName, listener);
+    }
     // TODO: Get rid of this wrapper once we remove deprecated `content` property (not before SDK47)
     const listenerWrapper = (event) => {
         const wrappedEvent = {

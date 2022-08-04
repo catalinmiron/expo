@@ -6,6 +6,7 @@
 #import <ExpoModulesCore/EXJavaScriptRuntime.h>
 #import <ExpoModulesCore/EXJavaScriptWeakObject.h>
 #import <ExpoModulesCore/EXJSIUtils.h>
+#import <ExpoModulesCore/Events.h>
 
 @implementation EXJavaScriptObject {
   /**
@@ -96,6 +97,20 @@
     jsi::String::createFromUtf8(*runtime, [name UTF8String]),
     std::move(descriptor),
   });
+}
+
+#pragma mark - Events
+
+- (void)emitEvent:(nonnull NSString *)eventName payload:(id)payload
+{
+  jsi::Runtime *runtime = [_runtime get];
+
+  if (expo::events::canEmitEvents(*runtime, *_jsObjectPtr)) {
+    expo::events::emitEvent(*runtime,
+                            *_jsObjectPtr,
+                            std::string([eventName UTF8String]),
+                            expo::convertObjCObjectToJSIValue(*runtime, payload));
+  }
 }
 
 #pragma mark - WeakObject

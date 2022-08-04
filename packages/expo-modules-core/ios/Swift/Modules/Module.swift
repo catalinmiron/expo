@@ -7,6 +7,7 @@
  */
 open class BaseModule {
   public private(set) weak var appContext: AppContext?
+  public weak var javaScriptObject: JavaScriptObject?
 
   @available(*, unavailable, message: "Module's initializer cannot be overriden, use \"onCreate\" definition component instead.")
   public init() {}
@@ -16,10 +17,16 @@ open class BaseModule {
   }
 
   /**
-   Sends an event with given name and body to JavaScript.
+   Sends an event with given name and payload to JavaScript.
    */
-  public func sendEvent(_ eventName: String, _ body: [String: Any?] = [:]) {
-    appContext?.eventEmitter?.sendEvent(withName: eventName, body: body)
+  public func sendEvent(_ eventName: String, _ payload: [String: Any?] = [:]) {
+    // Send the event to the global event emitter that can be captured from the modules proxy (bridge)
+    appContext?.eventEmitter?.sendEvent(withName: eventName, body: payload)
+
+    appContext?.runOnJavaScriptThread { [weak self] in
+      // Send the event to the underlying JavaScript object (JSI)
+      self?.javaScriptObject?.emitEvent(eventName, payload: payload)
+    }
   }
 }
 

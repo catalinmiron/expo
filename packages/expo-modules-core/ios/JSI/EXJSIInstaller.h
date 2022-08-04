@@ -4,6 +4,7 @@
 
 // Swift classes need forward-declaration in the headers.
 @class EXAppContext;
+@class EXJavaScriptObject;
 @class EXJavaScriptRuntime;
 
 @interface EXJavaScriptRuntimeManager : NSObject
@@ -19,5 +20,8 @@
  Returns a bool value whether the installation succeeded.
  */
 + (BOOL)installExpoModulesHostObject:(nonnull EXAppContext *)appContext;
+
++ (void)decorateEventEmitter:(nonnull EXJavaScriptObject *)object
+                   inRuntime:(nonnull EXJavaScriptRuntime *)runtime;
 
 @end

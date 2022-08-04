@@ -79,6 +79,10 @@ NS_SWIFT_NAME(JavaScriptObject)
  */
 - (void)defineProperty:(nonnull NSString *)name value:(nullable id)value options:(EXJavaScriptObjectPropertyDescriptor)options;
 
+#pragma mark - Events
+
+- (void)emitEvent:(nonnull NSString *)eventName payload:(id)payload;
+
 #pragma mark - WeakObject
 
 - (nonnull EXJavaScriptWeakObject *)createWeak;

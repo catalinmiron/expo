@@ -157,6 +157,10 @@ public final class AppContext: NSObject {
     }
   }
 
+  public func runOnJavaScriptThread(_ closure: @escaping () -> Void) {
+    reactBridge?.dispatchBlock(closure, queue: RCTJSThread)
+  }
+
   // MARK: - Interop with NativeModulesProxy
 
   /**

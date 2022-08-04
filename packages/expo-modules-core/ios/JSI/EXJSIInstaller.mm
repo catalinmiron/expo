@@ -1,8 +1,10 @@
 // Copyright 2018-present 650 Industries. All rights reserved.
 
 #import <ExpoModulesCore/EXJSIInstaller.h>
+#import <ExpoModulesCore/EXJavaScriptObject.h>
 #import <ExpoModulesCore/EXJavaScriptRuntime.h>
 #import <ExpoModulesCore/ExpoModulesHostObject.h>
+#import <ExpoModulesCore/Events.h>
 #import <ExpoModulesCore/Swift.h>
 
 namespace jsi = facebook::jsi;
@@ -50,6 +52,12 @@ static NSString *expoModulesHostObjectPropertyName = @"ExpoModules";
                    value:hostObject
                  options:EXJavaScriptObjectPropertyDescriptorEnumerable];
   return true;
+}
+
++ (void)decorateEventEmitter:(nonnull EXJavaScriptObject *)object
+                   inRuntime:(nonnull EXJavaScriptRuntime *)runtime
+{
+  expo::events::decorateEventEmitter(*[runtime get], *[object get]);
 }
 
 @end

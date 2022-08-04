@@ -64,6 +64,16 @@ public final class ModuleDefinition: ObjectDefinition {
     }
     return self
   }
+
+  // MARK: - JavaScriptObjectBuilder
+
+  public override func decorate(object: JavaScriptObject, inRuntime runtime: JavaScriptRuntime) {
+    super.decorate(object: object, inRuntime: runtime)
+
+    if eventNames.count > 0 {
+      EXJavaScriptRuntimeManager.decorateEventEmitter(object, in: runtime)
+    }
+  }
 }
 
 /**

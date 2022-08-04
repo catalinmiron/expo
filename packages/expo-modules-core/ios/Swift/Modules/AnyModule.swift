@@ -3,6 +3,12 @@
  */
 public protocol AnyModule: AnyObject, AnyArgument {
   /**
+   A JavaScript object representing this module.
+   Unavailable when the remote debugger is enabled or when the module was not loaded yet.
+   */
+  var javaScriptObject: JavaScriptObject? { get set }
+
+  /**
    The default initializer. Must be public, but the module class does *not* need to
    define it as it is implemented in protocol composition, see `BaseModule` class.
    */

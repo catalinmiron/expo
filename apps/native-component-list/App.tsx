@@ -37,6 +37,23 @@ const App = () => {
     await loadAssetsAsync();
   });
 
+  React.useEffect(() => {
+    try {
+      console.log(global.ExpoModules.ExpoClipboard.addListener);
+
+      const subscription = global.ExpoModules.ExpoClipboard.addListener(
+        'onClipboardChanged',
+        (payload) => {
+          console.log('listener called with payload:', payload);
+        }
+      );
+      console.log('subscription:', subscription);
+      // console.log('subscription.remove():', subscription.remove());
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
   return isLoadingCompleted ? <RootNavigation /> : null;
 };
 
