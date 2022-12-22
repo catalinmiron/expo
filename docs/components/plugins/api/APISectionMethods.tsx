@@ -78,11 +78,7 @@ export const renderMethod = (
             </div>
             <UL css={STYLES_NO_BULLET_LIST}>
               <LI>
-                <UndoIcon
-                  color={theme.icon.secondary}
-                  size={iconSize.small}
-                  css={returnIconStyles}
-                />
+                <UndoIcon color={theme.icon.secondary} size={iconSize.sm} css={returnIconStyles} />
                 <APIDataType typeDefinition={type} />
               </LI>
             </UL>

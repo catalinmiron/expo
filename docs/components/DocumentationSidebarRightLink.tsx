@@ -25,7 +25,7 @@ const STYLES_LINK_LABEL = css`
   color: ${theme.text.secondary};
 
   :hover {
-    color: ${theme.link.default};
+    color: ${theme.text.link};
   }
 `;
 
@@ -34,13 +34,13 @@ const STYLES_LINK_MONOSPACE = css`
 `;
 
 const STYLES_LINK_ACTIVE = css`
-  color: ${theme.link.default};
+  color: ${theme.text.link};
 `;
 
 const STYLES_TOOLTIP = css`
   border-radius: 3px;
   position: absolute;
-  background-color: ${theme.background.secondary};
+  background-color: ${theme.background.subtle};
   max-width: 400px;
   border: 1px solid ${theme.border.default};
   padding: 3px 6px;
